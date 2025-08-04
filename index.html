@@ -60,6 +60,29 @@
             color: #666;
             line-height: 1.4;
         }
+        
+        .random-quote {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            font-style: italic;
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            border-left: 4px solid #007bff;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .emoji-status {
+            text-align: center;
+            font-size: 48px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -69,11 +92,16 @@
             <iframe src="https://www.tickcounter.com/widget/countdown/7815236" style="top:0; left:0; width:100%; height:100%; position:absolute; border:0; overflow:hidden" title="Fim das férias"></iframe>
         </div>
         
+        <div class="random-quote" id="randomQuote">
+            As férias foram incríveis, mas todas as coisas boas chegam ao fim...
+        </div>
+        
         <div class="progress-section">
             <div class="progress-text" id="progressText">0%</div>
             <div class="progress-bar-container">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
+            <div class="emoji-status" id="emojiStatus">😎</div>
             <div class="progress-description">
                 Esta barra mostra o quão próximo estamos de 13:15 de hoje (04/08/2025).<br>
                 Quanto mais próximo do horário, mais vermelha a barra fica!
@@ -82,6 +110,34 @@
     </div>
 
     <script>
+        const quotes = [
+            "As férias foram incríveis, mas todas as coisas boas chegam ao fim...",
+            "Dormir até tarde, jogar o dia todo... saudades já bateram!",
+            "Nada de acordar cedo, nada de lição de casa... que saudade!",
+            "Férias de verão são as melhores, pena que acabam tão rápido!",
+            "Praia, piscina, diversão... agora é hora de voltar aos estudos",
+            "As férias passaram voando, parece que começaram ontem!",
+            "Que bom que foi relaxar, mas a escola também tem seu charme... né?",
+            "Férias escolares: 3 meses esperando, 2 semanas aproveitando!",
+            "O melhor das férias? Não ter que arrumar a mochila!",
+            "Série, games, dormir tarde... a rotina das férias vai fazer falta",
+            "Viagens em família, momentos únicos... valeu a pena cada segundo!",
+            "As férias de julho foram épicas, agora é preparar o coração!",
+            "Liberdade total acabando... pelo menos as memórias ficam!",
+            "Acordar quando quiser era bom demais para durar para sempre",
+            "Férias: o único momento que o despertador fica de castigo!"
+        ];
+        
+        function getEmojiByPercentage(percentage) {
+            if (percentage < 15) return "😎";
+            if (percentage < 30) return "🙂";
+            if (percentage < 50) return "😐";
+            if (percentage < 70) return "😟";
+            if (percentage < 85) return "😰";
+            if (percentage < 99) return "💀";
+            return "📚";
+        }
+        
         function updateProgress() {
             const now = new Date();
             const targetTime = new Date();
@@ -112,14 +168,26 @@
             // Atualizar barra de progresso
             const progressBar = document.getElementById('progressBar');
             const progressText = document.getElementById('progressText');
+            const emojiStatus = document.getElementById('emojiStatus');
             
             progressBar.style.width = percentage + '%';
             progressText.textContent = Math.round(percentage) + '%';
+            emojiStatus.textContent = getEmojiByPercentage(percentage);
+        }
+        
+        function updateQuote() {
+            const randomQuote = document.getElementById('randomQuote');
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            randomQuote.textContent = quotes[randomIndex];
         }
         
         // Atualizar a cada segundo
         updateProgress();
         setInterval(updateProgress, 1000);
+        
+        // Atualizar frase a cada 5 segundos
+        updateQuote();
+        setInterval(updateQuote, 5000);
     </script>
 </body>
 </html>
