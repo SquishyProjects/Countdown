@@ -10,12 +10,102 @@
             padding: 20px;
             background-color: white;
             font-family: Arial, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .gif-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .gif-item {
+            position: absolute;
+            opacity: 0.3;
+            border-radius: 10px;
+        }
+        
+        .gif-item:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            width: 150px;
+            height: 150px;
+            animation: float1 8s ease-in-out infinite;
+        }
+        
+        .gif-item:nth-child(2) {
+            top: 15%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            animation: float2 10s ease-in-out infinite;
+        }
+        
+        .gif-item:nth-child(3) {
+            bottom: 20%;
+            left: 8%;
+            width: 140px;
+            height: 140px;
+            animation: float3 12s ease-in-out infinite;
+        }
+        
+        .gif-item:nth-child(4) {
+            bottom: 15%;
+            right: 5%;
+            width: 130px;
+            height: 130px;
+            animation: float4 9s ease-in-out infinite;
+        }
+        
+        .gif-item:nth-child(5) {
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: 110px;
+            animation: float5 11s ease-in-out infinite;
+        }
+        
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(-3deg); }
+        }
+        
+        @keyframes float3 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(7deg); }
+        }
+        
+        @keyframes float4 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(-5deg); }
+        }
+        
+        @keyframes float5 {
+            0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+            50% { transform: translateX(-50%) translateY(-22px) rotate(4deg); }
         }
         
         .countdown-container {
             width: 100%;
             max-width: 800px;
             margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
         }
         
         h1 {
@@ -86,6 +176,14 @@
     </style>
 </head>
 <body>
+    <div class="gif-background">
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnd2OXBsZzk5OG1uZGU5YmhsanVseXZ0dmk0c3dzZTh3cmVyZnNkeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1AsyjZ8XLd1V7pUk/giphy.gif" class="gif-item" alt="">
+        <img src="https://media.tenor.com/wamkAAAAC/crying-spider-man.gif" class="gif-item" alt="">
+        <img src="https://media.tenor.com/hu4Dhw1l2kgAAApM/crying.gif" class="gif-item" alt="">
+        <img src="https://media.tenor.com/fRZK5osy9wkAAAAM/cry-crying.gif" class="gif-item" alt="">
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnd2OXBsZzk5OG1uZGU5YmhsanVseXZ0dmk0c3dzZTh3cmVyZnNkeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1AsyjZ8XLd1V7pUk/giphy.gif" class="gif-item" alt="">
+    </div>
+
     <div class="countdown-container">
         <h1>Fim Das Férias</h1>
         <div style="left:0; width:100%; height:0; position:relative; padding-bottom:25%; margin:0 auto">
@@ -114,16 +212,16 @@
             "As férias foram incríveis, mas todas as coisas boas chegam ao fim...",
             "Dormir até tarde, jogar o dia todo... saudades já bateram!",
             "Nada de acordar cedo, nada de lição de casa... que saudade!",
-            "Férias de inverno são as melhores, pena que acabam tão rápido!",
-            "diversão... agora é hora de voltar aos estudos",
+            "Férias de verão são as melhores, pena que acabam tão rápido!",
+            "Praia, piscina, diversão... agora é hora de voltar aos estudos",
             "As férias passaram voando, parece que começaram ontem!",
-            "Que bom que foi relaxar, mas a escola também tem seu charme... né? NÉ??? não.",
-            "Férias escolares: 5 meses esperando, 3 semanas aproveitando!",
+            "Que bom que foi relaxar, mas a escola também tem seu charme... né?",
+            "Férias escolares: 3 meses esperando, 2 semanas aproveitando!",
             "O melhor das férias? Não ter que arrumar a mochila!",
-            "Série, jogos, dormir tarde... a rotina das férias vai fazer falta",
-            "Viagens, momentos únicos... valeu a pena cada segundo!",
-            "As férias de julho foram épicas, agora é preparar o pior 📚!",
-            "Liberdade total acabando...",
+            "Série, games, dormir tarde... a rotina das férias vai fazer falta",
+            "Viagens em família, momentos únicos... valeu a pena cada segundo!",
+            "As férias de julho foram épicas, agora é preparar o coração!",
+            "Liberdade total acabando... pelo menos as memórias ficam!",
             "Acordar quando quiser era bom demais para durar para sempre",
             "Férias: o único momento que o despertador fica de castigo!"
         ];
