@@ -23,6 +23,43 @@
             margin-bottom: 20px;
             color: #333;
         }
+        
+        .progress-section {
+            margin-top: 30px;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 30px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 13px;
+            transition: width 0.5s ease;
+            background: linear-gradient(90deg, white 0%, #ffcccc 25%, #ff9999 50%, #ff6666 75%, #ff0000 100%);
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .progress-description {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
@@ -31,6 +68,58 @@
         <div style="left:0; width:100%; height:0; position:relative; padding-bottom:25%; margin:0 auto">
             <iframe src="https://www.tickcounter.com/widget/countdown/7815236" style="top:0; left:0; width:100%; height:100%; position:absolute; border:0; overflow:hidden" title="Fim das férias"></iframe>
         </div>
+        
+        <div class="progress-section">
+            <div class="progress-text" id="progressText">0%</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-description">
+                Esta barra mostra o quão próximo estamos de 13:15 de hoje (04/08/2025).<br>
+                Quanto mais próximo do horário, mais vermelha a barra fica!
+            </div>
+        </div>
     </div>
+
+    <script>
+        function updateProgress() {
+            const now = new Date();
+            const targetTime = new Date();
+            targetTime.setHours(13, 15, 0, 0); // 13:15:00
+            
+            // Se já passou de 13:15 hoje, definir para amanhã
+            if (now > targetTime) {
+                targetTime.setDate(targetTime.getDate() + 1);
+            }
+            
+            // Calcular início do dia (00:00)
+            const startOfDay = new Date();
+            startOfDay.setHours(0, 0, 0, 0);
+            
+            // Calcular tempo total do início do dia até 13:15
+            const totalTime = targetTime.getTime() - startOfDay.getTime();
+            
+            // Calcular tempo decorrido desde o início do dia
+            const elapsedTime = now.getTime() - startOfDay.getTime();
+            
+            // Calcular porcentagem
+            let percentage = (elapsedTime / totalTime) * 100;
+            
+            // Garantir que a porcentagem não passe de 100%
+            if (percentage > 100) percentage = 100;
+            if (percentage < 0) percentage = 0;
+            
+            // Atualizar barra de progresso
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            progressBar.style.width = percentage + '%';
+            progressText.textContent = Math.round(percentage) + '%';
+        }
+        
+        // Atualizar a cada segundo
+        updateProgress();
+        setInterval(updateProgress, 1000);
+    </script>
 </body>
 </html>
